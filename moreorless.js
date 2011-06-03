@@ -1,6 +1,8 @@
 /**
  *  moreorless.js - Developed by Travis Tidwell
  *
+ *  http://github.com/travist/moreorless.js
+ *
  *  Description:  This is an easy to use script that will make any element show
  *  more or less content.
  *
@@ -27,6 +29,9 @@
 (function($) {
   jQuery.fn.moreorless = function( min_height, more_text, less_text ) {
   
+    var read_more = "<strong><i><u>" + more_text + "</u></i></strong>";
+    var read_less = "<strong><i><u>" + less_text + "</u></i></strong>";
+  
     // Expand or contract a div element.
     function expandDiv( link, element, div_height ) {
       if( !$(element).hasClass('expanded') ) {
@@ -47,12 +52,8 @@
     this.each( function() {
     
       // Wrap the element in div tags.
-      var element = $("<div></div>").append(this);
-      
-      // Setup the read more or less text.
-      var read_more = "<strong><i><u>" + more_text + "</u></i></strong>";
-      var read_less = "<strong><i><u>" + less_text + "</u></i></strong>";
-      
+      var element = this;
+     
       // Add overflow hidden to the div wrappers.
       $(element).css({
         overflow: 'hidden'
@@ -75,6 +76,6 @@
           expandDiv(this, event.data.div, div_height);
         });
       }
-    };
+    });
   }
 })(jQuery);

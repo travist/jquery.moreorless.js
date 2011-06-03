@@ -73,6 +73,7 @@
           
           // Prevent default, and then call our own handler.
           event.preventDefault();
+          event.stopPropagation();
           expandDiv(this, event.data.div, div_height);
         });
       }

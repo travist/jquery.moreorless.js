@@ -93,24 +93,6 @@
         checkHeight();
       }
 
-      // Bind to when the link is clicked.
-      link.bind('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if( wrapper.hasClass('expanded') ) {
-          link.html(read_more);
-          wrapper.removeClass('expanded').animate({
-            height:min_height
-          }, 200);
-        }
-        else {
-          link.html(read_less);
-          wrapper.addClass('expanded').animate({
-            height:div_height
-          }, 200);
-        }
-      });
-
       // Check the height.
       checkHeight();
 

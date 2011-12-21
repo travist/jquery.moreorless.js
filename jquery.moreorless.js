@@ -40,18 +40,30 @@
       // Define all the elements of interest.
       var element = $(this);
       var div_height = element.height();
-      var wrapper = element.wrap('<div></div>').parent();
-      wrapper.addClass('moreorless_wrapper');
-      var link = $('a.moreorless_link');
+
+      var link = $('div.moreorless_link');
       var read_more = "<i><u>" + more_text + "</u></i>";
       var read_less = "<i><u>" + less_text + "</u></i>";
 
       // If the link is not found create it.
       if (link.length == 0) {
-        link = $(document.createElement('a'));
-        link.attr('href', 'javascript:void(0)');
+        link = $(document.createElement('div'));
+        link.css({
+          cursor: 'pointer',
+          position: 'absolute',
+          right: '5px',
+          zIndex: '1000'
+        });
         link.addClass('moreorless_link');
         link.append(read_more);
+      }
+
+      // Set the wrapper.
+      var wrapper = element.parent(".moreorless_wrapper");
+      if (wrapper.length == 0) {
+        wrapper = element.wrap('<div></div>').parent();
+        wrapper.addClass("moreorless_wrapper").css('overflow', 'hidden');
+        wrapper.height(min_height).after(link);
       }
 
       function bindLink() {
@@ -81,12 +93,13 @@
         if (div_height > min_height) {
           bindLink();
           link.html(read_more);
-          wrapper.removeClass('expanded');
-          wrapper.css({overflow: 'hidden'});
+          wrapper.removeClass('expanded').css('overflow', 'hidden');
           wrapper.height(min_height).after(link);
         }
         else {
-          wrapper.css({overflow: null}).height(null).next('a.moreorless_link').remove();
+          wrapper.removeClass('moreorless_wrapper');
+          wrapper.css('overflow', '').height('inherit');
+          link.remove();
         }
       }
 

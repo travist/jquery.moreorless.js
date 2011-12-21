@@ -80,7 +80,10 @@
       function checkHeight() {
         if (div_height > min_height) {
           bindLink();
-          wrapper.css({overflow: 'hidden'}).height(min_height).after(link);
+          link.html(read_more);
+          wrapper.removeClass('expanded');
+          wrapper.css({overflow: 'hidden'});
+          wrapper.height(min_height).after(link);
         }
         else {
           wrapper.css({overflow: null}).height(null).next('a.moreorless_link').remove();
@@ -98,11 +101,11 @@
 
       // Trigger when resize events occur, but don't trigger to fast.
       var resizeTimer = 0;
-      $(window).bind('resize', function () {
+      $(window).unbind('resize').bind('resize', function () {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(setElementHeight, 100);
       });
-      element.bind('resize', function() {
+      element.unbind('resize').bind('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(setElementHeight, 100);
       });

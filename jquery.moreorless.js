@@ -47,24 +47,26 @@
 
       // If the link is not found create it.
       if (link.length == 0) {
-        link = $(document.createElement('div'));
-        link.css({
-          cursor: 'pointer',
-          position: 'absolute',
-          right: '5px',
-          zIndex: '1000'
-        });
+        link = $(document.createElement('div')).css({cursor: 'pointer'});
         link.addClass('moreorless_link');
         link.append(read_more);
       }
 
-      // Set the wrapper.
-      var wrapper = element.parent(".moreorless_wrapper");
-      if (wrapper.length == 0) {
-        wrapper = element.wrap('<div></div>').parent();
-        wrapper.addClass("moreorless_wrapper").css('overflow', 'hidden');
-        wrapper.height(min_height).after(link);
+      // Set the content.
+      var content = element.parent(".moreorless_content");
+      if (content.length == 0) {
+        content = element.wrap('<div></div>').parent();
+        content.addClass("moreorless_content").css('overflow', 'hidden');
+        content.height(min_height).after(link);
       }
+
+      // Create a wrapper.
+      var wrapper = content.parent('.moreorless_wrapper');
+      if (wrapper.length == 0) {
+        wrapper = content.wrap('<div></div>').parent();
+        wrapper.addClass('moreorless_wrapper').css('position', 'relative');
+      }
+
 
       function bindLink() {
         if (link.length > 0) {
@@ -72,15 +74,15 @@
           link.unbind().bind('click', function(event) {
             event.preventDefault();
             event.stopPropagation();
-            if( wrapper.hasClass('expanded') ) {
+            if( content.hasClass('expanded') ) {
               link.html(read_more);
-              wrapper.removeClass('expanded').animate({
+              content.removeClass('expanded').animate({
                 height:min_height
               }, 200);
             }
             else {
               link.html(read_less);
-              wrapper.addClass('expanded').animate({
+              content.addClass('expanded').animate({
                 height:div_height
               }, 200);
             }
@@ -93,12 +95,12 @@
         if (div_height > min_height) {
           bindLink();
           link.html(read_more);
-          wrapper.removeClass('expanded').css('overflow', 'hidden');
-          wrapper.height(min_height).after(link);
+          content.removeClass('expanded').css('overflow', 'hidden');
+          content.height(min_height).after(link);
         }
         else {
-          wrapper.removeClass('moreorless_wrapper');
-          wrapper.css('overflow', '').height('inherit');
+          content.removeClass('moreorless_content');
+          content.css('overflow', '').height('inherit');
           link.remove();
         }
       }

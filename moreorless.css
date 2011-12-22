@@ -1,0 +1,15 @@
+div.moreorless_wrapper {
+  position: relative;
+}
+
+div.moreorless_link {
+  background-color: #fff;
+  position: absolute;
+  right: 1px;
+  bottom: 0px;
+  z-index: 1000;
+  padding: 4px;
+  -webkit-border-top-left-radius: 8px;
+  -moz-border-radius-topleft: 8px;
+  border-top-left-radius: 8px;
+}

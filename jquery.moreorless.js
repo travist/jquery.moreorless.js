@@ -27,7 +27,7 @@
  *  THE SOFTWARE.
  */
 (function($) {
-  jQuery.fn.moreorless = function( min_height, more_text, less_text ) {
+  jQuery.fn.moreorless = function(min_height, more_text, less_text) {
 
     // Default the parameters.
     min_height = min_height || 100;
@@ -40,7 +40,6 @@
       // Define all the elements of interest.
       var element = $(this);
       var div_height = element.height();
-
       var link = $('div.moreorless_link');
       var read_more = "<i><u>" + more_text + "</u></i>";
       var read_less = "<i><u>" + less_text + "</u></i>";
@@ -84,7 +83,9 @@
               link.html(read_less);
               content.addClass('expanded').animate({
                 height:div_height
-              }, 200);
+              }, 200, function() {
+                content.css('overflow', '').height('inherit');
+              });
             }
           });
         }

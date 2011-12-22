@@ -99,7 +99,6 @@
           content.height(min_height).after(link);
         }
         else {
-          content.removeClass('moreorless_content');
           content.css('overflow', '').height('inherit');
           link.remove();
         }

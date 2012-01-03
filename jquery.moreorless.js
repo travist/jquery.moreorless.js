@@ -55,8 +55,10 @@
       var content = element.parent(".moreorless_content");
       if (content.length == 0) {
         content = element.wrap('<div></div>').parent();
-        content.addClass("moreorless_content").css('overflow', 'hidden');
-        content.height(min_height).after(link);
+        content.addClass("moreorless_content");
+        content.css('overflow', 'hidden');
+        content.height(min_height);
+        content.after(link);
       }
 
       // Create a wrapper.
@@ -75,13 +77,16 @@
             event.stopPropagation();
             if( content.hasClass('expanded') ) {
               link.html(read_more);
-              content.removeClass('expanded').animate({
+              content.removeClass('expanded');
+              content.css('overflow', 'hidden');
+              content.animate({
                 height:min_height
               }, 200);
             }
             else {
               link.html(read_less);
-              content.addClass('expanded').animate({
+              content.addClass('expanded');
+              content.animate({
                 height:div_height
               }, 200, function() {
                 content.css('overflow', '').height('inherit');

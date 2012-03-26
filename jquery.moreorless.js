@@ -42,16 +42,22 @@
       this.div_height = 0;
 
       // Create the link.
-      this.link = $(document.createElement('div')).css({cursor: 'pointer'});
-      this.link.addClass('moreorless_link');
+      if (!this.link) {
+        this.link = $(document.createElement('div')).css({cursor: 'pointer'});
+        this.link.addClass('moreorless_link');
+      }
 
       // Set the content.
-      this.content = this.element.wrap('<div></div>').parent();
-      this.content.addClass("moreorless_content expanded");
+      if (!this.content) {
+        this.content = this.element.wrap('<div></div>').parent();
+        this.content.addClass("moreorless_content expanded");
+      }
 
       // Create a wrapper.
-      this.wrapper = this.content.wrap('<div></div>').parent();
-      this.wrapper.addClass('moreorless_wrapper').css('position', 'relative');
+      if (!this.wrapper) {
+        this.wrapper = this.content.wrap('<div></div>').parent();
+        this.wrapper.addClass('moreorless_wrapper').css('position', 'relative');
+      }
 
       /**
        * Expands or de-expands the content area.
@@ -59,8 +65,7 @@
        * @param {boolean} expand true - Expand, false - Unexpand.
        */
       this.expand = function(expand) {
-        var expanded = this.content.hasClass('expanded');
-        if (expand && !expanded) {
+        if (expand) {
           this.link.html("<i><u>" + less_text + "</u></i>");
           this.content.addClass('expanded').animate({
             height: this.div_height
@@ -70,7 +75,7 @@
             };
           })(this.content));
         }
-        else if(!expand && expanded) {
+        else {
           this.link.html("<i><u>" + more_text + "</u></i>");
           this.content.removeClass('expanded').animate({
             height: min_height

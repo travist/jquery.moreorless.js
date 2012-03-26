@@ -57,7 +57,7 @@
         content = element.wrap('<div></div>').parent();
         content.addClass("moreorless_content");
         content.css('overflow', 'hidden');
-        content.height(min_height);
+        content.animate({height: min_height});
         content.after(link);
       }
 

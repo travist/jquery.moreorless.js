@@ -64,7 +64,10 @@
        *
        * @param {boolean} expand true - Expand, false - Unexpand.
        */
-      this.expand = function(expand) {
+      this.expand = function(expand, fromClick) {
+        if (fromClick) {
+          this.forceExpand = expand;
+        }
         if (expand) {
           this.link.html("<i><u>" + less_text + "</u></i>");
           this.content.addClass('expanded').animate({
@@ -93,9 +96,11 @@
        */
       this.checkHeight = function() {
         if (this.div_height > min_height) {
-          this.bindLink();
-          this.expand(false);
-          this.content.after(this.link);
+          if (!this.forceExpand) {
+            this.bindLink();
+            this.expand(false);
+            this.content.after(this.link);
+          }
         }
         else {
           this.expand(true);
@@ -113,7 +118,7 @@
             return function(event) {
               event.preventDefault();
               event.stopPropagation();
-              widget.expand(!widget.content.hasClass('expanded'));
+              widget.expand(!widget.content.hasClass('expanded'), true);
             };
           })(this));
         }

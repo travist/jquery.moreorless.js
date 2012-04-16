@@ -6,7 +6,7 @@ div.moreorless_link {
   background-color: #fff;
   position: absolute;
   right: 1px;
-  bottom: 0px;
+  bottom: 1px;
   z-index: 1000;
   padding: 4px;
   -webkit-border-top-left-radius: 8px;

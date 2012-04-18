@@ -69,7 +69,7 @@
           this.forceExpand = expand;
         }
         if (expand) {
-          this.link.html("<i><u>" + less_text + "</u></i>");
+          this.link.html(less_text);
           this.content.addClass('expanded').animate({
             height: this.div_height
           }, (function(content) {
@@ -79,7 +79,7 @@
           })(this.content));
         }
         else {
-          this.link.html("<i><u>" + more_text + "</u></i>");
+          this.link.html(more_text);
           this.content.removeClass('expanded').animate({
             height: min_height
           }, (function(content) {
